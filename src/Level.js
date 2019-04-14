@@ -1,14 +1,22 @@
-import React from "react";
-import { Button } from "./Button.js";
+import React, { Component } from "react";
+import "./style/Button.css";
 
-const Level = props => {
-  return (
-    <div className="level">
-      <Button name="Level 1" />
-      <Button name="Level 2" />
-      <Button name="Level 3" />
-    </div>
-  );
-};
+class Level extends Component {
+  render() {
+    return (
+      <div className="level">
+        <button onClick={this.props.onClick} value="6">
+          {this.props.name}
+        </button>
+        <button onClick={this.props.onClick} value="8">
+          {this.props.name}
+        </button>
+        <button onClick={this.props.onClick} value="12">
+          {this.props.name}
+        </button>
+      </div>
+    );
+  }
+}
 
 export default Level;

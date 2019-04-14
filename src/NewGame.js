@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { Button } from "./Button.js";
+import "./style/Button.css";
 
 class NewGame extends Component {
   render() {
-    return <Button name="New Game" />;
+    return <button onClick={this.props.onClick}>{this.props.name}</button>;
   }
 }
 
