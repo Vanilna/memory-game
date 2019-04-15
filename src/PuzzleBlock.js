@@ -3,40 +3,52 @@ import Puzzle from "./Puzzle";
 
 class PuzzleBlock extends Component {
     makePuzzleItems() {
-        const puzzleItems = [];
+        const puzzleItems = []; //an item with <Puzzle /> components with src and key props
         const quantity = this.props.quantity;
-        puzzleItems.length = quantity;
-        let src;
-        const srcChecker = [];
+        let randomSrc;
+        const srcChecker = []; //for checking if all random src are unique
 
+        //function for creating random number in current range
         const randomNum = (min, max) => {
             return Math.floor(Math.random() * (max - min) + min);
         };
 
+        //function for creating a Puzzle instance wiht random src and plasing
+        //it at a random positon in puzzleItems array
         const createPuzzle = (currentSrc) => {
+            //find random index
             let index = randomNum(0, quantity);
 
+            //check if this index is occupied if no, create here a Puzzle instanse
             if (puzzleItems[index] === undefined) {
                 puzzleItems[index] = (
                     <Puzzle src={currentSrc} key={index} />
                 );
-            } else {
+            } 
+            // if this index is occupied - create a new random index and try again
+            else {
                 createPuzzle(currentSrc);
             }
         }
 
-        for (let i = 0; i < quantity / 2; i++) {
-            src = randomNum(0, 14);
+        //every src should appear twice, so our src quantity = half of Puzle quantity
+        for (let i = 0; i < quantity / 2; i++) { 
+            randomSrc = randomNum(0, 14);
 
-            if (srcChecker.indexOf(src) === -1) {
-                srcChecker.push(src);
+            //checking if this src was already used
+            //if no - creating 2 instances of Puzzle with that src on a random positions
+            if (srcChecker.indexOf(randomSrc) === -1) {
+                srcChecker.push(randomSrc);
 
-                createPuzzle(src);
-                createPuzzle(src);
-            } else {
+                createPuzzle(randomSrc);
+                createPuzzle(randomSrc);
+            } 
+            //if this src was used, stop the loop from going to next step 
+            //and choose other random src ard try again
+            else {
                 i--;
             }
-            
+
         }
 
         return puzzleItems;

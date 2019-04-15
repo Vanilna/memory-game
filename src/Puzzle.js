@@ -14,6 +14,7 @@ import puzzle11 from "./images/puzzle-11.jpg";
 import puzzle12 from "./images/puzzle-12.jpg";
 import puzzle13 from "./images/puzzle-13.jpg";
 
+//creating an array of image, from which imeges will be chosen due to the props.src property
 const images = [puzzle1, puzzle2, puzzle3, puzzle4, puzzle5,
 puzzle6, puzzle7, puzzle8, puzzle9, puzzle10, puzzle11, puzzle12, puzzle13]
 
