@@ -10,7 +10,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      numberOfPuzzles: 6,
+      quantity: 6,
       currentScore: 0,
       topScore: 0,
       newGame: false
@@ -20,12 +20,10 @@ class App extends Component {
   }
 
   changeLevel(e) {
-    console.log(1);
     this.setState({ numberOfPuzzles: parseInt(e.target.value, 10) });
   }
 
   newGame() {
-    console.log(1);
     this.setState({
       topScore: 0,
       newGame: true
@@ -39,7 +37,7 @@ class App extends Component {
         <NewGame onClick={this.newGame} />
         <Level onClick={this.changeLevel} />
         <PuzzleBlock
-          numberOfPuzzles={this.state.numberOfPuzzles}
+          quantity={this.state.quantity}
           newGame={this.nwGame}
         />
         <TopScore topScore={this.state.topScore} />

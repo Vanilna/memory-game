@@ -1,57 +1,56 @@
 import React, { Component } from "react";
-import { Puzzle } from "./Puzzle";
+import Puzzle from "./Puzzle";
 
 class PuzzleBlock extends Component {
-  randomSrcGenerator() {
-    let randomSrcArray = [];
-    const maxPuzzle = this.props.numberOfPuzzles;
-    let randomNumber;
-    let randomPuzzleNumbers = [];
-    randomSrcArray.length = maxPuzzle;
+    makePuzzleItems() {
+        const puzzleItems = [];
+        const quantity = this.props.quantity;
+        puzzleItems.length = quantity;
+        let src;
+        const srcChecker = [];
 
-    const checkPuzzleNumbers = () =>
-      randomPuzzleNumbers.findIndex(e => {
-        return e === randomNumber;
-      });
+        const randomNum = (min, max) => {
+            return Math.floor(Math.random() * (max - min) + min);
+        };
 
-    const checkSrcArray = elem => {
-      randomNumber = Math.floor(Math.random() * maxPuzzle);
+        const createPuzzle = (currentSrc) => {
+            let index = randomNum(0, quantity);
 
-      if (randomSrcArray[randomNumber] === undefined) {
-        randomSrcArray[randomNumber] = [
-          `./images/puzzle-${elem}.jpg`,
-          randomNumber
-        ];
-      } else {
-        checkSrcArray(elem);
-      }
-    };
+            if (puzzleItems[index] === undefined) {
+                puzzleItems[index] = (
+                    <Puzzle src={currentSrc} key={index} />
+                );
+            } else {
+                createPuzzle(currentSrc);
+            }
+        }
 
-    for (let i = 0; i < maxPuzzle / 2; i++) {
-      randomNumber = Math.floor(Math.random() * (14 - 1) + 1);
-      if (checkPuzzleNumbers() === -1) {
-        randomPuzzleNumbers.push(randomNumber);
-      } else {
-        i--;
-      }
+        for (let i = 0; i < quantity / 2; i++) {
+            src = randomNum(0, 14);
+
+            if (srcChecker.indexOf(src) === -1) {
+                srcChecker.push(src);
+
+                createPuzzle(src);
+                createPuzzle(src);
+            } else {
+                i--;
+            }
+            
+        }
+
+        return puzzleItems;
     }
 
-    randomPuzzleNumbers.forEach(elem => {
-      checkSrcArray(elem);
-      checkSrcArray(elem);
-    });
+    render() {
+        const puzzleItems = this.makePuzzleItems();
 
-    return randomSrcArray;
-  }
-
-  render() {
-    const currentSrcArray = this.randomSrcGenerator();
-    const puzzleItems = currentSrcArray.map(e => (
-      <Puzzle src={e[0]} key={e[1]} />
-    ));
-
-    return <section>{puzzleItems}</section>;
-  }
+        return (
+            <section>
+                {puzzleItems}
+            </section>
+        );
+    }
 }
 
 export default PuzzleBlock;
