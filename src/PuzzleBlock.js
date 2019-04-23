@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Puzzle from "./Puzzle";
+import { Random } from "./Random";
 
 class PuzzleBlock extends Component {
     makePuzzleItems() {
@@ -9,15 +10,13 @@ class PuzzleBlock extends Component {
         const srcChecker = []; //for checking if all random src are unique
 
         //function for creating random number in current range
-        const randomNum = (min, max) => {
-            return Math.floor(Math.random() * (max - min) + min);
-        };
+        
 
         //function for creating a Puzzle instance wiht random src and plasing
         //it at a random positon in puzzleItems array
         const createPuzzle = (currentSrc) => {
             //find random index
-            let index = randomNum(0, quantity);
+            let index = Random(0, quantity);
 
             //check if this index is occupied if no, create here a Puzzle instanse
             if (puzzleItems[index] === undefined) {
@@ -33,7 +32,7 @@ class PuzzleBlock extends Component {
 
         //every src should appear twice, so our src quantity = half of Puzle quantity
         for (let i = 0; i < quantity / 2; i++) { 
-            randomSrc = randomNum(0, 13);
+            randomSrc = Random(0, 13);
 
             //checking if this src was already used
             //if no - creating 2 instances of Puzzle with that src on a random positions

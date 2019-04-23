@@ -11,12 +11,7 @@ main {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(5, auto);
-  grid-template-areas:
-    "newGame header header"
-    ".       level  .     "
-    "puzzle  puzzle puzzle"
-    "puzzle  puzzle puzzle"
-    "topScore .     score ";
+  grid-template-areas: "newGame header header" ".       level  .     " "puzzle  puzzle puzzle" "puzzle  puzzle puzzle" "topScore .     score ";
   background-color: #ffff00;
 }
 
@@ -34,8 +29,14 @@ h1 {
 .puzzleBlock {
   grid-area: puzzle;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   grid-template-rows: auto;
+}
+
+@media (min-width: 600px) {
+  .puzzleBlock {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 .score {
@@ -47,13 +48,28 @@ h1 {
 }
 
 /*--------Flipping puzzles----------*/
+
 .scene {
-  width: 25vw;
-  height: 25vw;
+  width: 45vw;
+  height: 45vw;
   perspective: 600px;
   padding: 3vw;
   justify-self: center;
   align-self: center;
+}
+
+@media (min-width: 600px) {
+  .scene {
+    width: 30vw;
+    height: 30vw;
+  }
+}
+
+@media (min-width: 1200px) {
+  .scene {
+    width: 25vw;
+    height: 25vw;
+  }
 }
 
 .card {
@@ -83,14 +99,14 @@ h1 {
 }
 
 /*--------------level sector---------------*/
+
 .level {
   grid-area: level;
   display: flex;
   justify-content: space-around;
 }
 
-.level button,
-.newGame {
+.level button, .newGame {
   background-color: #2b2b00;
   border: none;
   color: #f9f9ea;
