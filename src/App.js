@@ -14,7 +14,9 @@ class App extends Component {
       currentScore: 0,
       topScore: 0,
       newGame: false,
-      clickTracker: { ckicedSrc: '', ckicedIndex: '' }
+      clickedSrc: '',
+      clickedIndex: '',
+      clicks: 0
     };
     this.changeLevel = this.changeLevel.bind(this);
     this.newGame = this.newGame.bind(this);
@@ -22,7 +24,13 @@ class App extends Component {
   }
 
   changeLevel(e) {
-    this.setState({ quantity: parseInt(e.target.value, 10) });
+    this.setState({ 
+      quantity: parseInt(e.target.value, 10),
+      currentScore: 0,
+      clickedSrc: '',
+      clickedIndex: '',
+      clicks: 0
+     });
   }
 
   newGame() {
@@ -32,25 +40,40 @@ class App extends Component {
     });
   }
 
-  countPoints(ckicedSrc, clickedIndex) {
-    console.log('count');
-    console.log(ckicedSrc, clickedIndex);
-
-    if (this.state.clickTracker.ckicedSrc === '') {
+  countPoints(clickedSrc, clickedIndex) {
+    console.log(`state: ${this.state.clickedSrc} , ${this.state.clickedIndex} 
+                clicked: ${clickedSrc} , ${clickedIndex} 
+                clicks: ${this.state.clicks} `);
+    //checking if it is a first click
+    if (this.state.clicks === 0) {
       this.setState({
-        clickTracker: {
-          ckicedSrc: ckicedSrc,
-          clickedIndex: clickedIndex
-        }
+        clickedSrc: clickedSrc,
+        clickedIndex: clickedIndex,
+        clicks: this.state.clicks + 1
       });
-    } else if (this.state.clickTracker.ckicedSrc === ckicedSrc 
-      && this.state.clickTracker.clickedIndex !== clickedIndex) {
+    } else if (this.state.clickedSrc === clickedSrc
+      && this.state.clickedIndex !== clickedIndex) {
+      let points;
+      switch (this.state.clicks) {
+        case 1:
+          points = 5;
+          break;
+        case 2:
+          points = 3;
+          break;
+        default:
+          points = 1;
+          break;
+      }
       this.setState({
-        currentScore: 1,
-        clickTracker: {
-          ckicedSrc: '',
-          clickedIndex: ''
-        }
+        currentScore: this.state.currentScore + points,
+        clickedSrc: '',
+        clickedIndex: '',
+        clicks: 0
+      });
+    } else {
+      this.setState({
+        clicks: this.state.clicks + 1
       });
     }
   }
@@ -63,7 +86,7 @@ class App extends Component {
         <Level onClick={this.changeLevel} name='Level' />
         <PuzzleBlock
           quantity={this.state.quantity}
-          newGame={this.newGame}
+          newGame={this.state.newGame}
           onClick={this.countPoints}
         />
         <TopScore topScore={this.state.topScore} />

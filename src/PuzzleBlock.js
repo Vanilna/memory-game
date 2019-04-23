@@ -9,6 +9,14 @@ class PuzzleBlock extends Component {
         };
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.quantity !== this.props.quantity) {
+            this.setState({
+                puzzleItems: MakePuzzleItems(nextProps.quantity, nextProps.onClick)
+            });
+        }
+    }
+
     render() {
         return <section className="puzzleBlock">{this.state.puzzleItems}</section>;
     }
