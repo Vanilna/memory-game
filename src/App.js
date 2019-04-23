@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import Level from "./Level";
-import NewGame from "./NewGame";
-import Score from "./Score";
-import TopScore from "./TopScore";
-import PuzzleBlock from "./PuzzleBlock";
-import "./style/App.css";
+import React, { Component } from 'react';
+import Level from './Level';
+import NewGame from './NewGame';
+import Score from './Score';
+import TopScore from './TopScore';
+import PuzzleBlock from './PuzzleBlock';
+import './style/App.css';
 
 class App extends Component {
   constructor(props) {
@@ -14,7 +14,7 @@ class App extends Component {
       currentScore: 0,
       topScore: 0,
       newGame: false,
-      clickCounter: { clicks: 0, itemKey: "" }
+      clickTracker: { ckicedSrc: '', ckicedIndex: '' }
     };
     this.changeLevel = this.changeLevel.bind(this);
     this.newGame = this.newGame.bind(this);
@@ -32,25 +32,35 @@ class App extends Component {
     });
   }
 
-  countPoints(e) {
-    console.log(1);
-    if (this.clickCounter.clicks === 0) {
+  countPoints(ckicedSrc, clickedIndex) {
+    console.log('count');
+    console.log(ckicedSrc, clickedIndex);
+
+    if (this.state.clickTracker.ckicedSrc === '') {
       this.setState({
-        clickCounter: {
-          clicks: this.clickCounter.clicks++,
-          itemKey: e.target.key
+        clickTracker: {
+          ckicedSrc: ckicedSrc,
+          clickedIndex: clickedIndex
+        }
+      });
+    } else if (this.state.clickTracker.ckicedSrc === ckicedSrc 
+      && this.state.clickTracker.clickedIndex !== clickedIndex) {
+      this.setState({
+        currentScore: 1,
+        clickTracker: {
+          ckicedSrc: '',
+          clickedIndex: ''
         }
       });
     }
-    console.log(e.target); /*else if (this.clickCounter.clicks === 1 && )*/
   }
 
   render() {
     return (
       <main>
         <h1>Find Matches</h1>
-        <NewGame onClick={this.newGame} name="New Game" />
-        <Level onClick={this.changeLevel} name="Level" />
+        <NewGame onClick={this.newGame} name='New Game' />
+        <Level onClick={this.changeLevel} name='Level' />
         <PuzzleBlock
           quantity={this.state.quantity}
           newGame={this.newGame}
