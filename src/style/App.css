@@ -1,33 +1,100 @@
-.App {
-  text-align: center;
+* {
+  box-sizing: border-box;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
-  pointer-events: none;
+body {
+  margin: 0;
+  padding: 0;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+main {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(5, auto);
+  grid-template-areas:
+    "newGame header header"
+    ".       level  .     "
+    "puzzle  puzzle puzzle"
+    "puzzle  puzzle puzzle"
+    "topScore .     score ";
+  background-color: #ffff00;
+}
+
+h1 {
+  grid-area: header;
+}
+
+.newGame {
+  grid-area: newGame;
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-content: center;
 }
 
-.App-link {
-  color: #61dafb;
+.puzzleBlock {
+  grid-area: puzzle;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: auto;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.score {
+  grid-area: score;
+}
+
+.topScore {
+  grid-area: topScore;
+}
+
+/*--------Flipping puzzles----------*/
+.scene {
+  width: 25vw;
+  height: 25vw;
+  perspective: 600px;
+  padding: 3vw;
+  justify-self: center;
+  align-self: center;
+}
+
+.card {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 1s;
+  transform-origin: center right;
+}
+
+.card-side {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 1em;
+  backface-visibility: hidden;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+}
+
+.card-side-front {
+  transform: rotateY(180deg);
+}
+
+.card.isFlipped {
+  transform: translateX(-100%) rotateY(-180deg);
+}
+
+/*--------------level sector---------------*/
+.level {
+  grid-area: level;
+  display: flex;
+  justify-content: space-around;
+}
+
+.level button,
+.newGame {
+  background-color: #2b2b00;
+  border: none;
+  color: #f9f9ea;
+  padding: 1em;
+  justify-self: center;
+  align-self: center;
 }

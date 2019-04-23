@@ -33,7 +33,7 @@ class PuzzleBlock extends Component {
 
         //every src should appear twice, so our src quantity = half of Puzle quantity
         for (let i = 0; i < quantity / 2; i++) { 
-            randomSrc = randomNum(0, 14);
+            randomSrc = randomNum(0, 13);
 
             //checking if this src was already used
             //if no - creating 2 instances of Puzzle with that src on a random positions
@@ -58,7 +58,7 @@ class PuzzleBlock extends Component {
         const puzzleItems = this.makePuzzleItems();
 
         return (
-            <section>
+            <section className="puzzleBlock">
                 {puzzleItems}
             </section>
         );
