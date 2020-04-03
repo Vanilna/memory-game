@@ -41,9 +41,7 @@ class App extends Component {
   }
 
   countPoints(clickedSrc, clickedIndex) {
-    console.log(`state: ${this.state.clickedSrc} , ${this.state.clickedIndex} 
-                clicked: ${clickedSrc} , ${clickedIndex} 
-                clicks: ${this.state.clicks} `);
+
     //checking if it is a first click
     if (this.state.clicks === 0) {
       this.setState({
