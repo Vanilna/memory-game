@@ -79,7 +79,7 @@ class App extends Component {
   render() {
     return (
       <main>
-        <h1>Find Matches</h1>
+        <h1 className='header'>Find Matches</h1>
         <NewGame onClick={this.newGame} name='New Game' />
         <Level onClick={this.changeLevel} name='Level' />
         <PuzzleBlock

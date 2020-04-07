@@ -1,5 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;400&display=swap');
+
 * {
   box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  color: #022701;
+  letter-spacing: .2rem;
 }
 
 body {
@@ -12,11 +18,7 @@ main {
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(5, auto);
   grid-template-areas: "newGame header header" ".       level  .     " "puzzle  puzzle puzzle" "puzzle  puzzle puzzle" "topScore .     score ";
-  background-color: #ffff00;
-}
-
-h1 {
-  grid-area: header;
+  background: linear-gradient(130deg, rgb(119, 234, 97, .8), #022701), url("../images/coverBG.jpg");
 }
 
 .newGame {
@@ -24,6 +26,15 @@ h1 {
   display: flex;
   justify-content: center;
   align-content: center;
+}
+
+.header {
+  grid-area: header;
+  text-transform: uppercase;
+  letter-spacing: .7rem;
+  text-shadow: 3px 3px 3px #022701;
+  font-size: 3rem;
+  color: #fff;
 }
 
 .puzzleBlock {
@@ -47,6 +58,17 @@ h1 {
   grid-area: topScore;
 }
 
+.topScore,
+.score {
+  justify-self: center;
+  text-transform: uppercase;
+  color: #fff;
+  font-weight: 400;
+  background-color: #022701;
+  padding: .5rem 1rem;
+  margin: 1rem;
+  border-radius: 2rem;
+}
 /*--------Flipping puzzles----------*/
 
 .scene {
@@ -87,7 +109,7 @@ h1 {
   height: 100%;
   border-radius: 1em;
   backface-visibility: hidden;
-  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
 }
 
 .card-side-front {
@@ -103,14 +125,16 @@ h1 {
 .level {
   grid-area: level;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 .level button, .newGame {
-  background-color: #2b2b00;
+  background-color: #022701;
   border: none;
-  color: #f9f9ea;
-  padding: 1em;
+  color: #fff;
+  padding: .5rem 1em;
   justify-self: center;
   align-self: center;
+  border-radius: 2em;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
 }
